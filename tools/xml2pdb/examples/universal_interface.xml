@@ -1,0 +1,114 @@
+<?xml version="1.0"?>
+<device>
+    <info>
+        <name xml:lang="en-US">6-Channel Universal Interfaces with Sensors</name>
+        <category xml:lang="en-US">Universal Interfaces</category>
+        <manufacturerId>M-013A</manufacturerId>
+        <catalogNumber>6</catalogNumber>
+        <catalogItemNumber>2</catalogItemNumber>
+        <serialNumber>00000001</serialNumber>
+        <versionNumber>1</versionNumber>
+        <orderNumber>00000000</orderNumber>
+        <applicationNumber>4</applicationNumber>
+        <applicationVersion>2</applicationVersion>
+        <loadProcedureStyle>ProductProcedure</loadProcedureStyle>
+    </info>
+    <memorySegments>
+        <memorySegment address="16384" size="512" name="AddressTable">
+            <data>{{ ("\x00" * 512) | b64encode }}</data>
+        </memorySegment>
+        <memorySegment address="20480" size="512" name="AssocTable">
+            <data>{{ ("\x00" * 512) | b64encode }}</data>
+        </memorySegment>
+        <memorySegment address="24576" size="512" name="ComObjectTable">
+            <data>{{ ("\x00" * 512) | b64encode }}</data>
+        </memorySegment>
+        <memorySegment address="28672" size="128" name="Settings" />
+    </memorySegments>
+    <channels>
+        <channelIndependent>
+            <name xml:lang="en-US">General</name>
+            <parameterBlocks>
+                <parameterBlock>
+                    <name xml:lang="en-US">Configuration</name>
+                    <parameters>
+                        <parameter type="unsignedInt" sizeInBit="8" default="1" name="General_StartupTime">
+                            <text xml:lang="en-US">Startup time</text>
+                        </parameter>
+                    </parameters>
+                </parameterBlock>
+            </parameterBlocks>
+            <comObjects>
+                <comObject name="General_SystemTime">
+                    <text xml:lang="en-US">System time</text>
+                    <function xml:lang="en-US">System time</function>
+                    <datapointType>DPST-19-1</datapointType>
+                    <updateFlag />
+                </comObject>
+            </comObjects>
+        </channelIndependent>
+        <channel>
+            <name xml:lang="en-US">Universal Interface</name>
+            <parameterBlocks>
+                {% for i in range(6) %}
+                    <parameterBlock>
+                        <name xml:lang="en-US">Channel {{ i }}</name>
+                        <parameters>
+                            <parameter type="unsignedInt" sizeInBit="1" uiHint="CheckBox" default="0" name="Channel{{ i }}_Enabled">
+                                <text xml:lang="en-US">Enabled</text>
+                                <memory segment="Settings" offset="{{ ((i * 8) + 0) }}" />
+                            </parameter>
+                        </parameters>
+                        <comObjects>
+                            <comObject name="Channel{{ i }}_Switch">
+                                <text xml:lang="en-US">Switch</text>
+                                <function xml:lang="en-US">Switch value</function>
+                                <datapointType>DPST-1-1</datapointType>
+                                <readFlag />
+                                <writeFlag />
+                                <transmitFlag />
+                            </comObject>
+                            <comObject name="Channel{{ i }}_Value">
+                                <text xml:lang="en-US">Value</text>
+                                <function xml:lang="en-US">Value for switch</function>
+                                <datapointType>DPST-1-1</datapointType>
+                                <readFlag />
+                                <writeFlag />
+                                <transmitFlag />
+                            </comObject>
+                        </comObjects>
+                    </parameterBlock>
+                {% endfor %}
+            </parameterBlocks>
+        </channel>
+        <channel>
+            <name xml:lang="en-US">Sensor Interface</name>
+            <parameterBlocks>
+                <parameterBlock>
+                    <name xml:lang="en-US">Temperature and Humidity</name>
+                    <parameters>
+                        <parameter type="unsignedInt" sizeInBit="1" uiHint="CheckBox" default="0" name="Sensor0_Enabled">
+                            <text xml:lang="en-US">Enabled</text>
+                        </parameter>
+                    </parameters>
+                </parameterBlock>
+                <parameterBlock>
+                    <name xml:lang="en-US">TOVC</name>
+                    <parameters>
+                        <parameter type="unsignedInt" sizeInBit="1" uiHint="CheckBox" default="0" name="Sensor1_Enabled">
+                            <text xml:lang="en-US">Enabled</text>
+                        </parameter>
+                    </parameters>
+                </parameterBlock>
+                <parameterBlock>
+                    <name xml:lang="en-US">Pressure</name>
+                    <parameters>
+                        <parameter type="unsignedInt" sizeInBit="1" uiHint="CheckBox" default="0" name="Sensor2_Enabled">
+                            <text xml:lang="en-US">Enabled</text>
+                        </parameter>
+                    </parameters>
+                </parameterBlock>
+            </parameterBlocks>
+        </channel>
+    </channels>
+</device>

@@ -1,0 +1,7 @@
+# Python files
+env/
+__pycache__/
+
+# Output files
+knx_master.xml
+*.knxprod

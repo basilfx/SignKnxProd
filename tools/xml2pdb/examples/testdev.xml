@@ -1,0 +1,117 @@
+<?xml version="1.0"?>
+<device>
+    <info>
+        <name xml:lang="en-US">Example Device</name>
+        <category xml:lang="en-US">Examples</category>
+        <manufacturerId>M-013A</manufacturerId>
+        <catalogNumber>6</catalogNumber>
+        <catalogItemNumber>2</catalogItemNumber>
+        <serialNumber>00000001</serialNumber>
+        <versionNumber>1</versionNumber>
+        <orderNumber>00000000</orderNumber>
+        <applicationNumber>4</applicationNumber>
+        <applicationVersion>2</applicationVersion>
+    </info>
+    <memorySegments>
+        <memorySegment address="16384" size="512" name="AddressTable">
+            <data>{{ ("\x00" * 512) | b64encode }}</data>
+        </memorySegment>
+        <memorySegment address="20480" size="512" name="AssocTable">
+            <data>{{ ("\x00" * 512) | b64encode }}</data>
+        </memorySegment>
+        <memorySegment address="24576" size="512" name="ComObjectTable">
+            <data>{{ ("\x00" * 512) | b64encode }}</data>
+        </memorySegment>
+    </memorySegments>
+    <channels>
+        <channel>
+            <name xml:lang="en-US">Channel 1 Name EN</name>
+            <parameterBlocks>
+                <parameterBlock>
+                    <name xml:lang="en-US">Parameter Block 1 Name EN</name>
+                    <parameters>
+                        <parameter type="unsignedInt" sizeInBit="8" default="0" name="Parameter1">
+                            <name xml:lang="en-US">Parameter 1 EN</name>
+                        </parameter>
+                        <parameter type="signedInt" sizeInBit="8" minInclusive="50" maxInclusive="100" uiHint="Slider" default="75" name="Parameter2">
+                            <name xml:lang="en-US">Parameter 2 EN</name>
+                        </parameter>
+                    </parameters>
+                </parameterBlock>
+                <parameterBlock>
+                    <name xml:lang="en-US">Parameter Block 2 Name EN</name>
+                    <parameters>
+                        <parameter type="float" sizeInBit="32" uiHint="Slider" default="0" name="Parameter3">
+                            <name xml:lang="en-US">Parameter 3 EN</name>
+                        </parameter>
+                        <parameter type="float" sizeInBit="16" minInclusive="0" maxInclusive="500" default="0" name="Parameter4">
+                            <name xml:lang="en-US">Parameter 4 EN</name>
+                        </parameter>
+                    </parameters>
+                </parameterBlock>
+            </parameterBlocks>
+        </channel>
+        <channel>
+            <name xml:lang="en-US">Channel 2 Name EN</name>
+            <parameterBlocks>
+                <parameterBlock>
+                    <name xml:lang="en-US">Parameter Block 3 Name EN</name>
+                    <parameters>
+                        <parameter type="unsignedInt" sizeInBit="1" uiHint="CheckBox" default="1" name="Parameter5">
+                            <name xml:lang="en-US">Parameter 5 EN</name>
+                        </parameter>
+                        <parameterSeparator>
+                            <text xml:lang="en-US">Separator Text EN</text>
+                        </parameterSeparator>
+                        <parameter type="text" sizeInBit="112" default="Hello world!" name="Parameter6">
+                            <name xml:lang="en-US">Parameter 6 EN</name>
+                        </parameter>
+                        <parameterSeparator />
+                        <parameter type="unsignedInt" sizeInBit="8" minInclusive="0" maxInclusive="255" default="0" name="Parameter7">
+                            <name xml:lang="en-US">Parameter 7 EN</name>
+                        </parameter>
+                        <parameter type="enumeration" sizeInBit="8" default="25" name="Parameter8">
+                            <name xml:lang="en-US">Parameter 8 EN</name>
+                            <entries>
+                                <entry value="1">
+                                    <name xml:lang="en-US">Entry 1 EN</name>
+                                </entry>
+                                <entry value="25">
+                                    <name xml:lang="en-US">Entry 25 EN</name>
+                                </entry>
+                            </entries>
+                        </parameter>
+                    </parameters>
+                </parameterBlock>
+            </parameterBlocks>
+        </channel>
+    </channels>
+    <comObjects>
+        <comObject name="Object1">
+            <text xml:lang="en-US">Object 1 Name EN</text>
+            <function xml:lang="en-US">Object 1 Function EN</function>
+            <datapointType>DPST-1-1</datapointType>
+            <readFlag />
+            <writeFlag />
+            <transmitFlag />
+        </comObject>
+        <comObject name="Object1">
+            <text xml:lang="en-US">Object 2 Name EN</text>
+            <function xml:lang="en-US">Object 2 Function EN</function>
+            <datapointType>DPST-3-7</datapointType>
+            <readFlag />
+        </comObject>
+        <comObject name="Object1">
+            <text xml:lang="en-US">Object 3 Name EN</text>
+            <function xml:lang="en-US">Object 3 Function EN</function>
+            <datapointType>DPST-5-1</datapointType>
+            <writeFlag />
+        </comObject>
+        <comObject name="Object1">
+            <text xml:lang="en-US">Object 4 Name EN</text>
+            <function xml:lang="en-US">Object 4 Function EN</function>
+            <datapointType>DPST-10-1</datapointType>
+            <transmitFlag />
+        </comObject>
+    </comObjects>
+</device>
